@@ -1691,6 +1691,23 @@ def _build_pal_parks():
     build_generic((PalPark,), "pal_park.csv", csv_record_to_objects)
 
 
+################
+#  PAST TYPES  #
+################
+
+
+def _build_past_types():
+    def csv_record_to_objects(info):
+        yield PastPokemonType(
+            pokemon_id=int(info[0]),
+            generation_id=int(info[1]),
+            type_id=int(info[2]),
+            slot=int(info[3])
+        )
+
+    build_generic((PastPokemonType,), "past_pokemon_types.csv", csv_record_to_objects)
+
+
 def build_all():
     _build_languages()
     _build_regions()
@@ -1717,6 +1734,7 @@ def build_all():
     _build_pokemons()
     _build_encounters()
     _build_pal_parks()
+    _build_past_types()
 
 
 if __name__ == "__main__":
