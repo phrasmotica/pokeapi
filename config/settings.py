@@ -4,7 +4,7 @@ from unipath import Path
 
 PROJECT_ROOT = Path(__file__).ancestor(2)
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -17,6 +17,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MANAGERS = ADMINS
 
 BASE_URL = 'http://pokeapi.co'
+BASE_DIR = '..'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -60,13 +61,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pokeapi_co_db',
-        'USER': 'root',
-        'PASSWORD': 'pokeapi',
-        'HOST': 'localhost',
-        'PORT': '',
-        'CONN_MAX_AGE': 30
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
