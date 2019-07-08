@@ -429,6 +429,16 @@ class PokemonTypeSerializer(serializers.ModelSerializer):
         fields = ('slot', 'pokemon', 'type')
 
 
+class PastPokemonTypeSerializer(serializers.ModelSerializer):
+
+    generation = GenerationSummarySerializer()
+    type = TypeSummarySerializer()
+
+    class Meta:
+        model = PastPokemonType
+        fields = ('pokemon', 'generation', 'type')
+
+
 class PokedexVersionGroupSerializer(serializers.ModelSerializer):
 
     pokedex = PokedexSummarySerializer()
@@ -2489,6 +2499,7 @@ class PokemonDetailSerializer(serializers.ModelSerializer):
     species = PokemonSpeciesSummarySerializer(source="pokemon_species")
     stats = PokemonStatSerializer(many=True, read_only=True, source="pokemonstat")
     types = serializers.SerializerMethodField('get_pokemon_types')
+    past_types = serializers.SerializerMethodField('get_past_pokemon_types')
     forms = PokemonFormSummarySerializer(many=True, read_only=True, source="pokemonform")
     held_items = serializers.SerializerMethodField('get_pokemon_held_items')
     location_area_encounters = serializers.SerializerMethodField('get_encounters')
@@ -2514,6 +2525,7 @@ class PokemonDetailSerializer(serializers.ModelSerializer):
             'sprites',
             'stats',
             'types',
+            'past_types',
         )
 
     def get_pokemon_sprites(self, obj):
@@ -2633,6 +2645,23 @@ class PokemonDetailSerializer(serializers.ModelSerializer):
             del poke_type['pokemon']
 
         return poke_types
+
+    def get_past_pokemon_types(self, obj):
+
+        poke_past_type_objects = PastPokemonType.objects.filter(pokemon=obj)
+
+        for poke in poke_past_type_objects:
+            print(poke.pokemon_id)
+            print(poke.generation_id)
+            print(poke.type_id)
+            print(poke.slot)
+
+        poke_past_types = PastPokemonTypeSerializer(poke_past_type_objects, many=True, context=self.context).data
+
+        for poke_past_type in poke_past_types:
+            del poke_past_type['pokemon']
+
+        return poke_past_types
 
     def get_encounters(self, obj):
 
