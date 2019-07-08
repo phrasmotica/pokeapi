@@ -436,7 +436,7 @@ class PastPokemonTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PastPokemonType
-        fields = ('pokemon', 'generation', 'type')
+        fields = ('pokemon', 'generation', 'slot', 'type')
 
 
 class PokedexVersionGroupSerializer(serializers.ModelSerializer):
