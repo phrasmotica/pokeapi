@@ -2649,19 +2649,36 @@ class PokemonDetailSerializer(serializers.ModelSerializer):
     def get_past_pokemon_types(self, obj):
 
         poke_past_type_objects = PastPokemonType.objects.filter(pokemon=obj)
-
-        for poke in poke_past_type_objects:
-            print(poke.pokemon_id)
-            print(poke.generation_id)
-            print(poke.type_id)
-            print(poke.slot)
-
         poke_past_types = PastPokemonTypeSerializer(poke_past_type_objects, many=True, context=self.context).data
 
+        # post-process each item of past type data to look nicer
+        current_generation = ""
+        past_obj = {}
+        final_data = []
         for poke_past_type in poke_past_types:
             del poke_past_type['pokemon']
+            
+            generation = poke_past_type['generation']['name']
+            if generation != current_generation:
+                current_generation = generation
+                past_obj = {}
 
-        return poke_past_types
+                # create past types object for this generation
+                past_obj['generation'] = poke_past_type['generation']
+                del poke_past_type['generation']
+
+                # create types array
+                past_obj['types'] = [poke_past_type]
+
+                # add to past types array
+                final_data.append(past_obj)
+
+            else:
+                # add to existing array for this generation
+                del poke_past_type['generation']
+                past_obj['types'].append(poke_past_type)
+
+        return final_data
 
     def get_encounters(self, obj):
 
