@@ -4159,7 +4159,7 @@ class APITests(APIData, APITestCase):
         self.assertEqual(
             response.data['stats'][0]['stat']['url'],
             '{}{}/stat/{}/'.format(TEST_HOST, API_V2, pokemon_stat.stat.pk))
-        # stat params
+        # type params
         self.assertEqual(response.data['types'][0]['slot'], pokemon_type.slot)
         self.assertEqual(response.data['types'][0]['type']['name'], pokemon_type.type.name)
         self.assertEqual(
