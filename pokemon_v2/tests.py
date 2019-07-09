@@ -5,7 +5,7 @@ from pokemon_v2.models import *
 
 # pylint: disable=redefined-builtin
 
-TEST_HOST = 'http://testserver'
+TEST_HOST = 'http://localhost:8000'
 MEDIA_HOST = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/'
 API_V2 = '/api/v2'
 
@@ -2629,7 +2629,7 @@ class APITests(APIData, APITestCase):
 
         sprites_data = json.loads(item_sprites.sprites)
 
-        response = self.client.get('{}/item/{}/'.format(API_V2, item.pk), HTTP_HOST='testserver')
+        response = self.client.get('{}/item/{}/'.format(API_V2, item.pk), HTTP_HOST='localhost:8000')
 
         # base params
         self.assertEqual(response.data['id'], item.pk)
@@ -3972,7 +3972,7 @@ class APITests(APIData, APITestCase):
         self.setup_pokemon_sprites_data(pokemon)
 
         response = self.client.get(
-            '{}/pokemon-species/{}/'.format(API_V2, pokemon_species.pk), HTTP_HOST='testserver')
+            '{}/pokemon-species/{}/'.format(API_V2, pokemon_species.pk), HTTP_HOST='localhost:8000')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -4125,7 +4125,7 @@ class APITests(APIData, APITestCase):
             location_area=location_area2, pokemon=pokemon,
             encounter_slot=encounter_slot2, min_level=32, max_level=36)
         response = self.client.get(
-            '{}/pokemon/{}/'.format(API_V2, pokemon.pk), HTTP_HOST='testserver')
+            '{}/pokemon/{}/'.format(API_V2, pokemon.pk), HTTP_HOST='localhost:8000')
 
         sprites_data = json.loads(pokemon_sprites.sprites)
 
@@ -4260,7 +4260,7 @@ class APITests(APIData, APITestCase):
         sprites_data = json.loads(pokemon_form_sprites.sprites)
 
         response = self.client.get(
-            '{}/pokemon-form/{}/'.format(API_V2, pokemon_form.pk), HTTP_HOST='testserver')
+            '{}/pokemon-form/{}/'.format(API_V2, pokemon_form.pk), HTTP_HOST='localhost:8000')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
