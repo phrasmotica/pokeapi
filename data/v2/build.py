@@ -591,6 +591,18 @@ def _build_types():
     build_generic((TypeEfficacy,), "type_efficacy.csv", csv_record_to_objects)
 
 
+def _build_types_past_efficacy():
+    def csv_record_to_objects(info):
+        yield TypePastEfficacy(
+            damage_type_id=int(info[0]),
+            target_type_id=int(info[1]),
+            damage_factor=int(info[2]),
+            generation_id=int(info[3]),
+        )
+
+    build_generic((TypePastEfficacy,), "past_type_efficacy.csv", csv_record_to_objects)
+
+
 #############
 #  CONTEST  #
 #############
@@ -1735,6 +1747,7 @@ def build_all():
     _build_encounters()
     _build_pal_parks()
     _build_past_types()
+    _build_types_past_efficacy()
 
 
 if __name__ == "__main__":
