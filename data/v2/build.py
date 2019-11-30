@@ -591,7 +591,6 @@ def _build_types():
     build_generic((TypeEfficacy,), "type_efficacy.csv", csv_record_to_objects)
 
 
-def _build_types_past_efficacy():
     def csv_record_to_objects(info):
         yield TypePastEfficacy(
             damage_type_id=int(info[0]),
@@ -1558,6 +1557,16 @@ def _build_pokemons():
 
     build_generic((PokemonType,), "pokemon_types.csv", csv_record_to_objects)
 
+    def csv_record_to_objects(info):
+        yield PastPokemonType(
+            pokemon_id=int(info[0]),
+            generation_id=int(info[1]),
+            type_id=int(info[2]),
+            slot=int(info[3])
+        )
+
+    build_generic((PastPokemonType,), "pokemon_types_past.csv", csv_record_to_objects)
+
 
 ###############
 #  ENCOUNTER  #
@@ -1708,18 +1717,6 @@ def _build_pal_parks():
 ################
 
 
-def _build_past_types():
-    def csv_record_to_objects(info):
-        yield PastPokemonType(
-            pokemon_id=int(info[0]),
-            generation_id=int(info[1]),
-            type_id=int(info[2]),
-            slot=int(info[3])
-        )
-
-    build_generic((PastPokemonType,), "pokemon_types_past.csv", csv_record_to_objects)
-
-
 def build_all():
     _build_languages()
     _build_regions()
@@ -1746,8 +1743,6 @@ def build_all():
     _build_pokemons()
     _build_encounters()
     _build_pal_parks()
-    _build_past_types()
-    _build_types_past_efficacy()
 
 
 if __name__ == "__main__":
