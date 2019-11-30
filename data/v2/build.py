@@ -1712,11 +1712,6 @@ def _build_pal_parks():
     build_generic((PalPark,), "pal_park.csv", csv_record_to_objects)
 
 
-################
-#  PAST TYPES  #
-################
-
-
 def build_all():
     _build_languages()
     _build_regions()
