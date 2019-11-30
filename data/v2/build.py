@@ -600,7 +600,7 @@ def _build_types_past_efficacy():
             generation_id=int(info[3]),
         )
 
-    build_generic((TypePastEfficacy,), "past_type_efficacy.csv", csv_record_to_objects)
+    build_generic((TypePastEfficacy,), "type_efficacy_past.csv", csv_record_to_objects)
 
 
 #############
@@ -1717,7 +1717,7 @@ def _build_past_types():
             slot=int(info[3])
         )
 
-    build_generic((PastPokemonType,), "past_pokemon_types.csv", csv_record_to_objects)
+    build_generic((PastPokemonType,), "pokemon_types_past.csv", csv_record_to_objects)
 
 
 def build_all():
