@@ -592,14 +592,14 @@ def _build_types():
 
 
     def csv_record_to_objects(info):
-        yield TypePastEfficacy(
+        yield TypeEfficacyPast(
             damage_type_id=int(info[0]),
             target_type_id=int(info[1]),
             damage_factor=int(info[2]),
             generation_id=int(info[3]),
         )
 
-    build_generic((TypePastEfficacy,), "type_efficacy_past.csv", csv_record_to_objects)
+    build_generic((TypeEfficacyPast,), "type_efficacy_past.csv", csv_record_to_objects)
 
 
 #############
@@ -1558,14 +1558,14 @@ def _build_pokemons():
     build_generic((PokemonType,), "pokemon_types.csv", csv_record_to_objects)
 
     def csv_record_to_objects(info):
-        yield PastPokemonType(
+        yield PokemonTypePast(
             pokemon_id=int(info[0]),
             generation_id=int(info[1]),
             type_id=int(info[2]),
             slot=int(info[3])
         )
 
-    build_generic((PastPokemonType,), "pokemon_types_past.csv", csv_record_to_objects)
+    build_generic((PokemonTypePast,), "pokemon_types_past.csv", csv_record_to_objects)
 
 
 ###############

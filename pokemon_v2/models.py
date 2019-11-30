@@ -604,7 +604,7 @@ class TypeEfficacy(HasTypeEfficacy):
 
 
 # model for a type's efficacy that was used until a given generation
-class TypePastEfficacy(HasTypeEfficacy, HasGeneration):
+class TypeEfficacyPast(HasTypeEfficacy, HasGeneration):
     pass
 
 
@@ -1493,7 +1493,7 @@ class PokemonType(HasPokemon, HasType):
 
 
 # model for a Pokemon's types that were used until a given generation
-class PastPokemonType(HasPokemon, HasType, HasGeneration):
+class PokemonTypePast(HasPokemon, HasType, HasGeneration):
     
     slot = models.IntegerField()
 

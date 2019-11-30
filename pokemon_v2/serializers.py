@@ -430,13 +430,13 @@ class PokemonTypeSerializer(serializers.ModelSerializer):
         fields = ('slot', 'pokemon', 'type')
 
 
-class PastPokemonTypeSerializer(serializers.ModelSerializer):
+class PokemonTypePastSerializer(serializers.ModelSerializer):
 
     generation = GenerationSummarySerializer()
     type = TypeSummarySerializer()
 
     class Meta:
-        model = PastPokemonType
+        model = PokemonTypePast
         fields = ('pokemon', 'generation', 'slot', 'type')
 
 
@@ -1678,12 +1678,12 @@ class TypeEfficacySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TypePastEfficacySerializer(serializers.ModelSerializer):
+class TypeEfficacyPastSerializer(serializers.ModelSerializer):
 
     generation = GenerationSummarySerializer()
 
     class Meta:
-        model = TypePastEfficacy
+        model = TypeEfficacyPast
         fields = ('target_type', 'damage_type', 'damage_factor', 'generation')
 
 
@@ -1772,8 +1772,8 @@ class TypeDetailSerializer(serializers.ModelSerializer):
 
     def get_type_past_relationships(self, obj):
 
-        results = TypePastEfficacy.objects.filter(Q(damage_type=obj) | Q(target_type=obj))
-        serializer = TypePastEfficacySerializer(
+        results = TypeEfficacyPast.objects.filter(Q(damage_type=obj) | Q(target_type=obj))
+        serializer = TypeEfficacyPastSerializer(
             results, many=True, context=self.context)
         
         # group data by generation
@@ -2757,8 +2757,8 @@ class PokemonDetailSerializer(serializers.ModelSerializer):
 
     def get_past_pokemon_types(self, obj):
 
-        poke_past_type_objects = PastPokemonType.objects.filter(pokemon=obj)
-        poke_past_types = PastPokemonTypeSerializer(poke_past_type_objects, many=True, context=self.context).data
+        poke_past_type_objects = PokemonTypePast.objects.filter(pokemon=obj)
+        poke_past_types = PokemonTypePastSerializer(poke_past_type_objects, many=True, context=self.context).data
 
         # post-process each item of past type data to look nicer
         current_generation = ""

@@ -1821,15 +1821,15 @@ class APIData():
         type = type or cls.setup_type_data(
             name='tp for pkmn')
 
-        pokemon_past_type = PastPokemonType(
+        pokemon_type_past = PokemonTypePast(
             pokemon=pokemon,
             generation=generation,
             type=type,
             slot=slot
         )
-        pokemon_past_type.save()
+        pokemon_type_past.save()
 
-        return pokemon_past_type
+        return pokemon_type_past
 
     @classmethod
     def setup_pokemon_item_data(cls, pokemon=None, item=None, version=None, rarity=50):
@@ -3181,7 +3181,7 @@ class APITests(APIData, APITestCase):
         # past type relations
         generation = self.setup_generation_data(name='past gen')
         
-        past_no_damage_to_relation = TypePastEfficacy(
+        past_no_damage_to_relation = TypeEfficacyPast(
             damage_type=type,
             target_type=no_damage_to,
             damage_factor=0,
@@ -3189,7 +3189,7 @@ class APITests(APIData, APITestCase):
         )
         past_no_damage_to_relation.save()
 
-        past_half_damage_to_relation = TypePastEfficacy(
+        past_half_damage_to_relation = TypeEfficacyPast(
             damage_type=type,
             target_type=half_damage_to,
             damage_factor=50,
@@ -3197,7 +3197,7 @@ class APITests(APIData, APITestCase):
         )
         past_half_damage_to_relation.save()
 
-        past_double_damage_to_relation = TypePastEfficacy(
+        past_double_damage_to_relation = TypeEfficacyPast(
             damage_type=type,
             target_type=double_damage_to,
             damage_factor=200,
@@ -3205,7 +3205,7 @@ class APITests(APIData, APITestCase):
         )
         past_double_damage_to_relation.save()
 
-        past_no_damage_from_relation = TypePastEfficacy(
+        past_no_damage_from_relation = TypeEfficacyPast(
             damage_type=no_damage_from,
             target_type=type,
             damage_factor=0,
@@ -3213,7 +3213,7 @@ class APITests(APIData, APITestCase):
         )
         past_no_damage_from_relation.save()
 
-        past_half_damage_from_relation = TypePastEfficacy(
+        past_half_damage_from_relation = TypeEfficacyPast(
             damage_type=half_damage_from,
             target_type=type,
             damage_factor=50,
@@ -3221,7 +3221,7 @@ class APITests(APIData, APITestCase):
         )
         past_half_damage_from_relation.save()
 
-        past_double_damage_from_relation = TypePastEfficacy(
+        past_double_damage_from_relation = TypeEfficacyPast(
             damage_type=double_damage_from,
             target_type=type,
             damage_factor=200,
