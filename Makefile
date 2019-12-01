@@ -22,6 +22,12 @@ test:
 clean:
 	find . -type f -name '*.pyc' -delete
 
+make_migrations:
+	python manage.py makemigrations --settings=config.pokeplannerweb
+
+merge_migrations:
+	python manage.py makemigrations --merge --settings=config.pokeplannerweb
+
 migrate:
 	python manage.py migrate --settings=config.pokeplannerweb
 
