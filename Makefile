@@ -17,7 +17,7 @@ serve:
 	python manage.py runserver --settings=config.pokeplannerweb
 
 test:
-	python manage.py test --settings=config.pokeplannerweb
+	python manage.py test --settings=config.local
 
 clean:
 	find . -type f -name '*.pyc' -delete
