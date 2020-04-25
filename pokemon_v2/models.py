@@ -1892,6 +1892,11 @@ class PokemonTypePast(HasPokemon, HasType, HasGeneration):
     slot = models.IntegerField()
 
 
+class PokemonFormType(HasPokemonForm, HasType):
+
+    slot = models.IntegerField()
+
+
 class PokemonSprites(HasPokemon):
 
     sprites = models.CharField(max_length=500)
